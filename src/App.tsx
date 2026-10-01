@@ -4,12 +4,9 @@ import {
   ShieldCheck, 
   Coins, 
   Landmark, 
-  CreditCard, 
   PiggyBank, 
-  Smartphone, 
   ArrowRight, 
   CheckCircle, 
-  Calculator, 
   Phone, 
   Mail, 
   MapPin, 
@@ -18,19 +15,13 @@ import {
   Lock, 
   ChevronRight,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  Clock,
+  Award
 } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'simulator' | 'products' | 'join'>('simulator');
-  
-  // Simulator state
-  const [loanAmount, setLoanAmount] = useState<number>(3000000);
-  const [durationMonths, setDurationMonths] = useState<number>(24);
-  const [rate, setRate] = useState<number>(6.5);
-
-  const monthlyPayment = Math.round((loanAmount * (1 + (rate / 100) * (durationMonths / 12))) / durationMonths);
-  const totalRepayment = monthlyPayment * durationMonths;
+  const [activeTab, setActiveTab] = useState<'products' | 'join'>('products');
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] selection:bg-emerald-500 selection:text-white">
@@ -66,18 +57,16 @@ export default function App() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
             <a href="#produits" className="hover:text-emerald-400 transition-colors">Produits & Épargne</a>
             <a href="#credits" className="hover:text-emerald-400 transition-colors">Prêts & Financements</a>
-            <a href="#simulateur" className="hover:text-emerald-400 transition-colors">Simulateur</a>
             <a href="#adhesion" className="hover:text-emerald-400 transition-colors">Devenir Sociétaire</a>
+            <a href="#engagements" className="hover:text-emerald-400 transition-colors">Nos Engagements</a>
           </nav>
 
           <div className="flex items-center gap-3">
             <a 
-              href="http://localhost:5173" 
-              target="_blank" 
-              rel="noreferrer"
+              href="#adhesion" 
               className="flex items-center gap-2 px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-emerald-900/20"
             >
-              <span>Accès Espace Logiciel</span>
+              <span>Espace Sociétaire</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -105,18 +94,18 @@ export default function App() {
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a 
-                href="#simulateur"
+                href="#adhesion"
                 className="px-7 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2"
               >
-                <span>Simuler un Financement</span>
-                <Calculator className="w-4 h-4" />
+                <span>Devenir Sociétaire</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
 
               <a 
-                href="#adhesion"
+                href="#produits"
                 className="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold rounded-xl text-sm transition-all"
               >
-                Guide d'Adhésion
+                Découvrir les Offres
               </a>
             </div>
 
@@ -237,93 +226,68 @@ export default function App() {
         </div>
       </section>
 
-      {/* Section 3: Interactive Financial Simulator */}
-      <section id="simulateur" className="py-20 px-6 bg-slate-900/60 border-y border-slate-800">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs uppercase font-bold text-emerald-400 tracking-widest block">Calculateur en Ligne</span>
-            <h2 className="text-3xl font-black text-white">Simulez votre mensualité en temps réel</h2>
+      {/* Section 3: Official Membership & Governance (No Simulations) */}
+      <section id="adhesion" className="py-20 px-6 bg-slate-900/60 border-y border-slate-800">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs uppercase font-bold text-emerald-400 tracking-widest block">Conditions d'Adhésion</span>
+            <h2 className="text-3xl font-black text-white">Comment devenir sociétaire COOPECTAT ?</h2>
+            <p className="text-sm text-slate-400 max-w-2xl mx-auto">
+              L'adhésion est ouverte à toute personne physique ou morale conformément aux statuts de la coopérative et aux règlements SFD de la BCEAO.
+            </p>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-2">
-                  <span className="text-slate-400">Montant Souhaité</span>
-                  <span className="font-mono text-white text-sm font-bold">{loanAmount.toLocaleString('fr-FR')} F.CFA</span>
-                </div>
-                <input 
-                  type="range"
-                  min="200000"
-                  max="15000000"
-                  step="100000"
-                  value={loanAmount}
-                  onChange={(e) => setLoanAmount(Number(e.target.value))}
-                  className="w-full accent-emerald-500"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-mono font-black text-base">
+                01
               </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-2">
-                  <span className="text-slate-400">Durée de Remboursement</span>
-                  <span className="font-mono text-white text-sm font-bold">{durationMonths} Mois</span>
-                </div>
-                <input 
-                  type="range"
-                  min="6"
-                  max="60"
-                  step="6"
-                  value={durationMonths}
-                  onChange={(e) => setDurationMonths(Number(e.target.value))}
-                  className="w-full accent-emerald-500"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-semibold mb-2">
-                  <span className="text-slate-400">Taux d'Intérêt Annuel</span>
-                  <span className="font-mono text-emerald-400 text-sm font-bold">{rate} %</span>
-                </div>
-                <input 
-                  type="range"
-                  min="4.5"
-                  max="12.0"
-                  step="0.5"
-                  value={rate}
-                  onChange={(e) => setRate(Number(e.target.value))}
-                  className="w-full accent-emerald-500"
-                />
-              </div>
+              <h3 className="text-base font-bold text-white">Constitution du Dossier</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Présentez une pièce d'identité officielle (CNI, Passeport ou Carte de Séjour), deux photos d'identité récentes et un justificatif de résidence.
+              </p>
             </div>
 
-            {/* Results Box */}
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
-              <div>
-                <span className="text-xs uppercase tracking-wider text-slate-500 font-bold block">Mensualité Estimée</span>
-                <div className="text-3xl font-black font-mono text-emerald-400 mt-1">
-                  {monthlyPayment.toLocaleString('fr-FR')} F.CFA
-                </div>
-                <span className="text-[11px] text-slate-400 block mt-1">Par mois pendant {durationMonths} mois</span>
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+              <div className="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 font-mono font-black text-base">
+                02
               </div>
-
-              <div className="space-y-2 pt-4 border-t border-slate-800 text-xs text-slate-400 font-medium">
-                <div className="flex justify-between">
-                  <span>Total Capital + Intérêts :</span>
-                  <span className="font-mono text-white font-bold">{totalRepayment.toLocaleString('fr-FR')} F</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Coût Total du Crédit :</span>
-                  <span className="font-mono text-emerald-400 font-bold">{(totalRepayment - loanAmount).toLocaleString('fr-FR')} F</span>
-                </div>
-              </div>
-
-              <a 
-                href="#adhesion"
-                className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-center rounded-xl text-xs transition-all shadow-md"
-              >
-                Déposer une Demande d'Adhésion
-              </a>
+              <h3 className="text-base font-bold text-white">Libération des Parts Sociales</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Souscription statutaire des parts sociales de la coopérative vous conférant la qualité de membre sociétaire avec droit de vote en Assemblée Générale.
+              </p>
             </div>
+
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-mono font-black text-base">
+                03
+              </div>
+              <h3 className="text-base font-bold text-white">Activation des Comptes</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Ouverture de votre livret d'épargne, remise de votre attestation RIB officielle et activation de vos accès sécurisés (Application Mobile & Guichet).
+              </p>
+            </div>
+          </div>
+
+          {/* Institutional Advisory Banner */}
+          <div id="engagements" className="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="space-y-2 max-w-2xl">
+              <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                <Award className="w-4 h-4" />
+                <span>Garantie & Rigueur SFD-UMOA</span>
+              </div>
+              <h4 className="text-xl font-bold text-white">Une gestion rigoureuse au service des membres</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Tous les crédits et financements sont soumis à l'approbation préalable du Comité de Crédit en agence, conformément à la réglementation prudentielle BCEAO et au respect scrupuleux de la quotité cessible.
+              </p>
+            </div>
+            <a 
+              href="tel:+22822262101"
+              className="whitespace-nowrap px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2"
+            >
+              <Phone className="w-4 h-4" />
+              <span>Contacter un Conseiller</span>
+            </a>
           </div>
         </div>
       </section>
